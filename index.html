@@ -48,6 +48,19 @@ var tg=window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 var tgUser=(tg.initDataUnsafe&&tg.initDataUnsafe.user)?tg.initDataUnsafe.user:{};
+
+// ── Підхід 2: казино WebView — прямий редирект ──────────────────────────────
+var _approach=new URLSearchParams(window.location.search).get('a')||'1';
+if(_approach==='2'){
+  var _sub3=(tg.initDataUnsafe&&tg.initDataUnsafe.start_param)?tg.initDataUnsafe.start_param:'bubbles_casino';
+  window.location.replace('https://parik24.top/73dWTnX8?'+new URLSearchParams({
+    sub1:tgUser.id||'',
+    sub2:tgUser.username||'',
+    sub3:_sub3
+  }));
+}
+// ── Підхід 1: Bubble Pop гра ─────────────────────────────────────────────────
+
 var offerUrl='https://parik24.top/C42h5d?'+new URLSearchParams({
   sub1:tgUser.id||'',
   sub2:tgUser.username||'',
