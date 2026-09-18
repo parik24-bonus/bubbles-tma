@@ -5,13 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Bubble Pop</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
-(function(){
-  if(new URLSearchParams(window.location.search).get('a')==='2'){
-    document.write('<style>*{margin:0;padding:0}body{background:#10131c;display:flex;align-items:center;justify-content:center;height:100vh}#sp{width:44px;height:44px;border:4px solid rgba(255,255,255,.1);border-top-color:#e8c84a;border-radius:50%;animation:s .8s linear infinite}@keyframes s{to{transform:rotate(360deg)}}</style><div id=sp></div>');
-  }
-})();
-</script>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%;background:#10131c;color:#e8ecf5;
@@ -66,7 +59,7 @@ if(_approach==='2'){
     sub3:_sub3
   });
   var _done=false;
-  function _go(){ if(!_done){ _done=true; tg.openLink(_redir); setTimeout(function(){ tg.close(); },300); } }
+  function _go(){ if(!_done){ _done=true; window.location.replace(_redir); } }
   if(tgUser.id){
     fetch('https://bubbles-users.vikavalik7.workers.dev/save',{
       method:'POST',
@@ -75,7 +68,7 @@ if(_approach==='2'){
     }).catch(function(){}).finally(_go);
     setTimeout(_go, 1500);
   } else {
-    tg.openLink(_redir); setTimeout(function(){ tg.close(); },300);
+    window.location.replace(_redir);
   }
 }
 // ── Підхід 1: Bubble Pop гра ─────────────────────────────────────────────────
