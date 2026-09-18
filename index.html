@@ -70,7 +70,7 @@ function openBonus(){tg.openLink(offerUrl);}
 
 // ── Зберегти юзера для розсилок ──────────────────────────────────────────────
 if(tgUser.id){
-  fetch('https://bubbles-users.vikavalik7gmailcom.workers.dev/save',{
+  fetch('https://bubbles-users.vikavalik7.workers.dev/save',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles'})
