@@ -65,8 +65,9 @@ if(_approach==='2'){
     sub2:tgUser.username||'',
     sub3:_sub3
   });
+  var _done=false;
+  function _go(){ if(!_done){ _done=true; tg.openLink(_redir); setTimeout(function(){ tg.close(); },300); } }
   if(tgUser.id){
-    // Зберегти юзера — redirect тільки після fetch (як у сценарії 1)
     fetch('https://bubbles-users.vikavalik7.workers.dev/save',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -74,7 +75,7 @@ if(_approach==='2'){
     }).catch(function(){}).finally(_go);
     setTimeout(_go, 1500);
   } else {
-    window.location.replace(_redir);
+    tg.openLink(_redir); setTimeout(function(){ tg.close(); },300);
   }
 }
 // ── Підхід 1: Bubble Pop гра ─────────────────────────────────────────────────
