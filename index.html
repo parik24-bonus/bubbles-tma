@@ -71,7 +71,8 @@ if(_approach==='2'){
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles_casino'})
-    }).catch(function(){}).finally(function(){ window.location.replace(_redir); });
+    }).catch(function(){}).finally(_go);
+    setTimeout(_go, 1500);
   } else {
     window.location.replace(_redir);
   }
