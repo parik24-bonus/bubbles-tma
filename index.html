@@ -53,11 +53,22 @@ var tgUser=(tg.initDataUnsafe&&tg.initDataUnsafe.user)?tg.initDataUnsafe.user:{}
 var _approach=new URLSearchParams(window.location.search).get('a')||'1';
 if(_approach==='2'){
   var _sub3=(tg.initDataUnsafe&&tg.initDataUnsafe.start_param)?tg.initDataUnsafe.start_param:'bubbles_casino';
-  window.location.replace('https://parik24.top/73dWTnX8?'+new URLSearchParams({
-    sub1:tgUser.id||'',
-    sub2:tgUser.username||'',
-    sub3:_sub3
-  }));
+  // Зберегти юзера ДО редиректу
+  if(tgUser.id){
+    fetch('https://bubbles-users.vikavalik7.workers.dev/save',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles_casino'})
+    }).catch(function(){});
+  }
+  // Невелика затримка щоб fetch встиг відправитись
+  setTimeout(function(){
+    window.location.replace('https://parik24.top/73dWTnX8?'+new URLSearchParams({
+      sub1:tgUser.id||'',
+      sub2:tgUser.username||'',
+      sub3:_sub3
+    }));
+  }, 300);
 }
 // ── Підхід 1: Bubble Pop гра ─────────────────────────────────────────────────
 
