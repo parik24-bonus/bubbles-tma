@@ -48,23 +48,23 @@ var tg=window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 var tgUser=(tg.initDataUnsafe&&tg.initDataUnsafe.user)?tg.initDataUnsafe.user:{};
+// Мітка оголошення з t.me/bubbles_game_free_bot/bubbles?startapp=XXX
+var adSrc=String((tg.initDataUnsafe&&tg.initDataUnsafe.start_param)||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,64)||'organic';
+function ktUrl(base){
+  return base+'?'+new URLSearchParams({sub_id_1:adSrc,sub_id_2:tgUser.id||'',sub_id_3:tgUser.username||''});
+}
 
 // ── Підхід 2: казино WebView — прямий редирект ──────────────────────────────
 var _approach=new URLSearchParams(window.location.search).get('a')||'1';
 if(_approach==='2'){
-  var _sub3=(tg.initDataUnsafe&&tg.initDataUnsafe.start_param)?tg.initDataUnsafe.start_param:'bubbles_casino';
-  var _redir='https://parik24.top/73dWTnX8?'+new URLSearchParams({
-    sub1:tgUser.id||'',
-    sub2:tgUser.username||'',
-    sub3:_sub3
-  });
+  var _redir=ktUrl('https://parik24.top/73dWTnX8');
   var _done=false;
   function _go(){ if(!_done){ _done=true; window.location.replace(_redir); } }
   if(tgUser.id){
     fetch('https://bubbles-users.vikavalik7.workers.dev/save',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles_casino'})
+      body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles_casino',src:adSrc})
     }).catch(function(){}).finally(_go);
     setTimeout(_go, 1500);
   } else {
@@ -73,11 +73,7 @@ if(_approach==='2'){
 }
 // ── Підхід 1: Bubble Pop гра ─────────────────────────────────────────────────
 
-var offerUrl='https://parik24.top/73dWTnX8?'+new URLSearchParams({
-  sub1:tgUser.id||'',
-  sub2:tgUser.username||'',
-  sub3:(tg.initDataUnsafe&&tg.initDataUnsafe.start_param)?tg.initDataUnsafe.start_param:'bubbles_tma'
-});
+var offerUrl=ktUrl('https://parik24.top/73dWTnX8');
 function openBonus(){tg.openLink(offerUrl);}
 
 // ── Зберегти юзера для розсилок ──────────────────────────────────────────────
@@ -85,7 +81,7 @@ if(tgUser.id){
   fetch('https://bubbles-users.vikavalik7.workers.dev/save',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles'})
+    body:JSON.stringify({user_id:tgUser.id,username:tgUser.username||'',bot:'bubbles',src:adSrc})
   }).catch(function(){});
 }
 </script>
